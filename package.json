@@ -1,0 +1,28 @@
+{
+  "name": "kindle-admin",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Manager local de la biblioteca del Kindle",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "test": "node --test \"test/*.test.js\"",
+    "lint": "eslint . && prettier --check .",
+    "format": "prettier --write ."
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "@xmldom/xmldom": "^0.9.12",
+    "jszip": "^3.10.1",
+    "pdfjs-dist": "^4.10.38"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.5",
+    "eslint": "^9.39.5",
+    "globals": "^17.14.0",
+    "prettier": "^3.10.1"
+  }
+}

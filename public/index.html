@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>kindle admin</title>
+    <link rel="stylesheet" href="/styles.css" />
+    <link rel="icon" href="/favicon.svg" sizes="any" type="image/svg+xml" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div>
+        <h1>kindle admin</h1>
+        <p id="device" class="device" data-state="off">buscando el Kindle…</p>
+      </div>
+      <div class="toolbar">
+        <span id="count" class="count"></span>
+        <input id="search" type="search" placeholder="buscar título o autor" autocomplete="off" />
+        <button id="add" class="btn btn-primary" type="button" disabled>agregar</button>
+      </div>
+    </header>
+
+    <main>
+      <section id="setup" class="setup" hidden>
+        <p id="setup-text"></p>
+        <ul id="setup-checks" class="setup-checks"></ul>
+        <div class="actions">
+          <button id="setup-ssh" class="btn btn-primary" type="button">habilitar acceso por wifi</button>
+        </div>
+        <p id="setup-status" class="status" role="status"></p>
+      </section>
+
+      <ul id="grid" class="grid"></ul>
+      <p id="empty" class="empty" hidden>nada por acá</p>
+    </main>
+
+    <div id="drop-overlay" class="drop-overlay" hidden>soltá el libro para mandarlo al Kindle</div>
+    <p id="toast" class="toast" role="status" hidden></p>
+
+    <dialog id="book">
+      <button class="close" type="button" aria-label="cerrar" data-close>&times;</button>
+      <div class="book-layout">
+        <div class="book-poster">
+          <label id="cover-edit" class="cover-edit">
+            <img id="book-cover" alt="" />
+            <span class="cover-hint">cambiar portada</span>
+            <input id="cover-input" type="file" accept="image/jpeg,image/png,image/gif,image/webp" />
+          </label>
+          <!-- Al elegir una imagen: se acomoda en el marco (arrastrar y zoom) antes de usarla. -->
+          <div id="cropper" class="cropper" hidden>
+            <div id="crop-frame" class="crop-frame" tabindex="0" aria-label="acomodar portada">
+              <img id="crop-img" alt="" draggable="false" />
+            </div>
+            <input id="crop-zoom" class="crop-zoom" type="range" min="0" max="1" step="0.001" aria-label="zoom" />
+            <p class="crop-hint">arrastrá para mover · rueda o barra para el zoom</p>
+            <div class="crop-actions">
+              <button id="crop-ok" class="btn btn-primary" type="button">listo</button>
+              <button id="crop-cancel" class="btn" type="button">cancelar</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="book-info">
+          <h2 id="book-title" class="editable" data-field="title" data-placeholder="título"></h2>
+          <p class="byline">
+            de
+            <span
+              id="book-authors"
+              class="editable"
+              data-field="authors"
+              data-placeholder="autor"
+              title="para varios autores, separalos con &amp;"
+            ></span>
+          </p>
+          <p class="meta">
+            <span class="editable" data-field="language" data-placeholder="idioma"></span>
+            <span class="editable" data-field="publisher" data-placeholder="editorial"></span>
+            <span id="book-size"></span>
+          </p>
+          <p class="description editable" data-field="description" data-placeholder="sin descripción"></p>
+          <p id="book-status" class="status" role="status"></p>
+          <div class="actions">
+            <button id="book-save" class="btn btn-primary" type="button" hidden>guardar</button>
+            <button id="book-discard" class="btn" type="button" hidden>descartar</button>
+            <button id="book-delete" class="btn btn-danger" type="button">borrar</button>
+          </div>
+        </div>
+      </div>
+    </dialog>
+
+    <dialog id="add-dialog" class="add-dialog">
+      <button class="close" type="button" aria-label="cerrar" data-close>&times;</button>
+      <h2>agregar al Kindle</h2>
+      <label class="dropzone">
+        arrastrá un EPUB o PDF acá o hacé click para elegirlo
+        <input id="file-input" type="file" accept=".epub,.pdf" multiple />
+      </label>
+      <p id="add-status" class="status" role="status"></p>
+    </dialog>
+
+    <script src="/app.js"></script>
+  </body>
+</html>
